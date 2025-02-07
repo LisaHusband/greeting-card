@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>情人节贺卡定制（80年代风）</title>
+    <title>Valentine's Day Card Customization (80s Style)</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <style>
         body {
-            /* 使用80年代风格的背景 */
+            /* 80s-style background */
             background: linear-gradient(to right, #ff4b2b, #ff416c);
             font-family: 'Arial', sans-serif;
             color: #fff;
@@ -77,92 +77,151 @@
     </style>
 </head>
 <body>
-    <!-- 致敬标题 -->
+    <!-- Tribute Title -->
     <h2 style="text-align: center; color: #fffc00; font-size: 2em; text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);">
-        致敬每一个活在80年代的你
+        A Tribute to Every One of You Who Lived Through the 80s
     </h2>
-    <!-- 背景音乐 ，显示为一个小的音乐播放器，在页面右侧,颜色和背景色一致-->
-<audio autoplay controls id="musicPlayer" style="position: fixed; top: 10px; right: 10px; width: 100px; height: 40px; opacity: 0.5;">
-    <source src="{{ url_for('static', filename='music/3385112214.mp3') }}" type="audio/mp3">
-    你的浏览器不支持音频标签。
-</audio>
+    <!-- Background music, displayed as a small player on the right, matching the color and background -->
+    <audio autoplay controls id="musicPlayer" style="position: fixed; top: 10px; right: 10px; width: 100px; height: 40px; opacity: 0.5;">
+        <source src="{{ url_for('static', filename='music/3385112214.mp3') }}" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
 
-<!-- Custom CSS to style the player -->
-<style>
-    #musicPlayer {
-        background-color: transparent; /* Make the background transparent */
-        border: none; /* Remove default border */
-    }
+    <!-- Custom CSS to style the player -->
+    <style>
+        /* Donation section styles */
+        .donation-section {
+            text-align: center;
+            margin-top: 30px;
+        }
 
-    /* Customize the controls appearance */
-    #musicPlayer::-webkit-media-controls-panel {
-        background-color: transparent;
-        border-radius: 5px;
-    }
-    
-    #musicPlayer::-webkit-media-controls-play-button {
-        background-color: transparent;
-    }
+        .donation-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
 
-    /* Remove the default audio controls (optional) */
-    #musicPlayer::-webkit-media-controls-volume-slider {
-        display: none;
-    }
-</style>
+        .donation-section p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
 
-    
+        .donation-section button {
+            background-color: #e67e22;
+        }
+
+        .donation-section .qr-code {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .donation-section .donation-qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .donation-section .paypal-container img {
+            width: 150px;
+            height: auto;
+        }
+
+        .donation-section .qr-code img {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .donation-section .qr-code p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        #musicPlayer {
+            background-color: transparent; /* Make the background transparent */
+            border: none; /* Remove default border */
+        }
+
+        /* Customize the controls appearance */
+        #musicPlayer::-webkit-media-controls-panel {
+            background-color: transparent;
+            border-radius: 5px;
+        }
+        
+        #musicPlayer::-webkit-media-controls-play-button {
+            background-color: transparent;
+        }
+
+        /* Remove the default audio controls (optional) */
+        #musicPlayer::-webkit-media-controls-volume-slider {
+            display: none;
+        }
+    </style>
 
     <div class="container">
-        <h1>定制你的情人节贺卡</h1>
+        <h1>Customize Your Valentine's Day Card</h1>
 
-        <label for="background">选择背景颜色:</label>
+        <label for="background">Choose Background Color:</label>
         <input type="color" id="background" name="background" value="#f0f0f0">
         
-        <label for="text">祝福语:</label>
-        <textarea id="text" name="text" placeholder="输入你的祝福..."></textarea>
+        <label for="text">Message:</label>
+        <textarea id="text" name="text" placeholder="Enter your message..."></textarea>
 
-        <label for="font_color">选择字体颜色:</label>
+        <label for="font_color">Choose Font Color:</label>
         <input type="color" id="font_color" name="font_color" value="#000000">
 
-        <button id="generateBtn">生成贺卡</button>
+        <button id="generateBtn">Generate Card</button>
 
         <div id="preview">
-            <h2>预览:</h2>
+            <h2>Preview:</h2>
             <div id="cardPreview" style="background-color: #f0f0f0; color: #000000;">
-                <p>你的祝福语会出现在这里</p>
+                <p>Your message will appear here.</p>
             </div>
         </div>
         <div id="template">
-            <h2>不知道说什么话的，模板:</h2>
+            <h2>Template for Those Who Don’t Know What to Write:</h2>
             <div id="card" style="background-color: #f0f0f0; color: #000000;">
-                <p>亲爱的 [TA的名字]：
+                <p>Dear [Recipient's Name]:
 
-在这个充满温馨与爱意的情人节，我想对你说一声：我爱你。或许这句话听起来很简单，但对于我来说，却是我想要对你说的最深刻的话。无论是文字，还是语言，抑或是行动，都无法完全表达我对你无尽的爱。今天，我将用这封贺卡来表达我所有的情感。
+On this Valentine's Day filled with warmth and love, I want to say to you: I love you. Perhaps this sentence sounds simple, but to me, it is the most profound thing I want to say to you. Whether through words, language, or actions, nothing can fully express my endless love for you. Today, I will use this card to express all my emotions.
 
-爱，不是一种简单的情绪，它是无数个瞬间汇聚而成的温暖。我们从相识、相知、到相爱，经历了许多的日子。每一天，和你在一起，我感受到了前所未有的幸福。无论是平凡的日子，还是那些特别的时刻，都是因为你，让我觉得每一刻都那么珍贵。
+Love is not just a simple feeling; it is the warmth accumulated in countless moments. We’ve experienced many days from acquaintance to love. Every day, being with you, I feel an unprecedented happiness. Whether it’s ordinary days or special moments, it is because of you that I feel every moment is so precious.
 
-还记得第一次见到你吗？那一刻，我的世界仿佛静止了。你的笑容、眼神，甚至是你的一举一动，都让我深深着迷。时光荏苒，虽然我们有过欢笑，也有过争执，但每一次的相处，都让我更清楚地知道，只有你，才能让我感受到最真实的自己。我明白，这份爱是一种沉淀，是一种经历过风雨之后依然坚定的选择。
+Do you remember the first time we met? That moment, my world seemed to stop. Your smile, your eyes, even your every move, captivated me deeply. Time has passed, and although we've had laughter and arguments, every moment spent together has made me realize that only you can make me feel my true self. I understand that this love is a sediment, a choice that remains firm even after going through storms.
 
-情人节是一个象征爱情的节日，而我认为，真正的爱情不仅仅是用一句“我爱你”来表达的。它是在生活的点滴中，通过每一个细节，逐渐累积的力量。无论是你温柔的关怀，还是你默默的付出，所有的一切都让我深刻体会到，你对我的爱是如此真挚与纯粹。每一份关心，每一次的问候，每一次相视的眼神，都让我感受到满满的爱意。
+Valentine’s Day is a symbol of love, but I believe that true love is not just expressed with the words “I love you.” It is the power accumulated through every detail of daily life. Whether it is your gentle care or your quiet devotion, everything makes me feel your love is so sincere and pure. Every care, every greeting, every glance we exchange makes me feel so loved.
 
-在我们相爱的日子里，我们一同经历了许多的挑战，也一同享受了无数的美好时光。记得那些与朋友聚会的欢声笑语，记得那些一起旅行时的欢快步伐，记得那些我们在安静的夜晚聊着未来的梦想。每一份记忆，都是那么的美好，那么的难忘。
+In the days we've been in love, we've faced many challenges and enjoyed countless beautiful moments together. I remember the laughter at friends’ gatherings, the joyful steps we took while traveling, and the quiet nights we shared discussing our dreams for the future. Every memory is so beautiful, so unforgettable.
 
-虽然生活中有很多忙碌的瞬间，但我知道，无论多么繁忙的日子，与你在一起的时光总是最美好的。我们之间的默契和理解，让我更加坚信，这份爱是值得我去珍惜和守护的。
+Although life is full of busy moments, I know that no matter how busy the days are, the time spent with you is always the most beautiful. Our mutual understanding and connection make me more certain that this love is worth cherishing and guarding.
 
-今天是情人节，也是属于我们的节日。在这个特别的日子里，我想感谢你给我的一切。你让我明白，爱情并不仅仅是甜言蜜语，更多的是在平凡的生活中，彼此的支持与陪伴。你在我身边的每一天，都是我生命中最美好的时光。我为能够与你携手走过每一天而感到骄傲与幸福。
+Today is Valentine’s Day, our special day. On this day, I want to thank you for everything you’ve given me. You have taught me that love is not just sweet words; more importantly, it is the support and companionship we share in everyday life. Every day with you by my side is the happiest time of my life. I am proud and happy to walk through every day with you.
 
-我希望，我们可以一直这样，携手走下去。无论未来的路有多么曲折，我们都能够一起面对，互相支持。因为有你在，我相信再大的风雨也不能将我们击倒。你的存在就是我最大的力量和勇气。
+I hope that we can continue to walk hand in hand like this. No matter how winding the future road is, we will face it together and support each other. Because with you, I believe that no storm can defeat us. Your presence gives me the greatest strength and courage.
 
-亲爱的，谢谢你一直以来的陪伴和爱护。今天，我想对你说：我会一直爱你，不论时光如何变迁，不论岁月如何流转。我会珍惜与你共度的每一刻，走过每一段人生的路。无论前方是阳光明媚，还是风雨交加，我都会和你并肩前行，直到永远。
+Thank you, my dear, for always being by my side. Today, I want to say to you: I will always love you, no matter how time changes, no matter how the years flow. I will cherish every moment spent with you, walk through every road of life with you. Whether the future is sunny or stormy, I will walk by your side, forever.
 
-愿这份情感，在情人节的今天，化作我心底的真挚祝福，送给你，带给你温暖和甜蜜。希望我们的爱像这颗星星一样，永不熄灭，永远闪耀。我会一直陪伴在你身边，不管是风雨还是晴空。
+May this feeling, on this Valentine’s Day, turn into my heartfelt blessings, sending you warmth and sweetness. I hope our love, like this star, will never fade and always shine. I will always be by your side, whether it’s rainy or sunny.
 
-亲爱的，情人节快乐！我爱你！</p>
+Happy Valentine's Day, my love!</p>
             </div>
         </div>
     </div>
 
-    <!-- 在此加载 JS 文件 -->
+    <!-- Include JS file -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <div class="donation-section">
+        <h2>Support Donation</h2>
+        <p>If you find my project useful, please consider donating!</p>
+        <div class="paypal-container">
+            <a href="{{ url_for('static', filename='images/donation-qrcode.png') }}" target="_blank">
+                <img src="{{ url_for('static', filename='images/alipay-logo.svg') }}" alt="Donate with Alipay">
+            </a>
+        </div>
+    </div>
 </body>
 </html>
