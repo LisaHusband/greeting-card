@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+#preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#cardPreview {
+    margin-top: 20px;
+    padding: 50px;
+    text-align: center;
+}
+
+.heart-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://path-to-heart-animation.gif') no-repeat center center;
+    animation: heartAnimation 3s infinite;
+}
+
+@keyframes heartAnimation {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}

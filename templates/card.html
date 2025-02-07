@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>您的情人节贺卡</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 50px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+    
+        h1 {
+            font-size: 2.5em;
+            color: #fffc00;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
+        }
+    
+        #card {
+            background-color: {{ card.background }};
+            color: {{ card.font_color }};
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    
+        .heart-effect {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            animation: heartbeat 1s infinite;
+            transform-origin: center;
+            border-radius: 50%;
+        }
+    
+        .sparkle-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('https://cdn.pixabay.com/photo/2016/06/25/09/46/sparkles-1470836_960_720.png') no-repeat center center;
+            background-size: cover;
+            animation: sparkleAnimation 2s infinite;
+            top: 30%;
+            left: 50%;
+            margin-left: -50px;
+        }
+    
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    
+        @keyframes sparkleAnimation {
+            0% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+    
+        /* Typing effect with text wrapping */
+        .typing-text {
+            display: inline-block;
+            font-size: 1.2em;
+            overflow: hidden;
+            border-right: 4px solid rgba(255, 255, 255, 0.75);
+            white-space: normal;  /* Allow text wrapping */
+            width: 100%;  /* Ensure the container expands */
+            max-width: 100%; /* Allow content to flow */
+            animation: typing 5s steps(40) 1s forwards, blink 0.75s step-end infinite;
+        }
+    
+        @keyframes typing {
+            100% {
+                width: 100%;
+            }
+        }
+    
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <audio autoplay controls id="musicPlayer" style="position: fixed; top: 10px; right: 10px; width: 100px; height: 40px; opacity: 0.5;">
+        <source src="{{ url_for('static', filename='music/3385112214.mp3') }}" type="audio/mp3">
+        你的浏览器不支持音频标签。
+    </audio>
+
+    <div class="container">
+        <h1>Happy Valentine's Day</h1>
+        <div id="card" style="background-color: {{ card.background }}; color: {{ card.font_color }};">
+            <p class="typing-text">{{ card.text }}</p>
+            {% if card.effect == 'heart' %}
+                <div class="heart-effect"></div>
+            {% elif card.effect == 'sparkle' %}
+                <div class="sparkle-effect"></div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
