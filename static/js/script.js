@@ -37,7 +37,7 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         console.log('Response received:', data);
-        alert('贺卡生成成功！请分享链接: ' + data.card_url);
+        alert('Greeting card generated successfully! Please share the link: ' + data.card_url);
     })
     .catch(error => {
         console.error('Error:', error);
