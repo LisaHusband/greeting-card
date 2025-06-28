@@ -77,7 +77,7 @@ In `app.py`, set up your Flask application:
 
 #### 5. Customization Options
 
-* **background**: Color code or image URL for the background of the card.
+* **background**: Color code for the background of the card.
 * **font\_color**: Font color for the text.
 * **text**: The text that will be displayed on the card (e.g., "Happy Valentine's Day!").
 
